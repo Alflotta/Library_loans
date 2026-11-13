@@ -1,0 +1,7 @@
+LoanId,Member,Book,DueDate,ReturnDate
+L001,Aigerim,Clean Code,2026-10-10,2026-10-15
+L002,Beck,SICP,2026-10-12,2026-10-12
+L003,Dana,Dune,2026-10-05,
+L004,Erlan,Algorithms,2026-09-01,
+L005,Farida,Refactoring,2026-10-18,2026-10-16
+L006,Gulnaz,Hobbit,2026-10-19,

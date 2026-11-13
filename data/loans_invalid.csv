@@ -1,0 +1,4 @@
+LoanId,Member,Book,DueDate,ReturnDate
+L001,Aigerim,Clean Code,2026-10-10,2026-10-15
+L002,Beck,SICP,12/10/2026,
+L003,,Dune,2026-10-05
