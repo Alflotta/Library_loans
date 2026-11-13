@@ -1,0 +1,6 @@
+MEMBER,Aigerim
+BOOK,Dune,two
+CHECKOUT,L1,Aigerim,Dune,10/10/2026,7
+RETURN,L1
+FLY,L1
+CHECKOUT,L2,Aigerim,Dune,2026-10-01,seven
