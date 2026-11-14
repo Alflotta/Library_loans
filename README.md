@@ -3,7 +3,7 @@ Introduction to Functional Programming, academic year 2026-2027
 Group IT-2505: Zholdas Aliya (leader), Ismagul Nuray, Abdurakhim Aliya, Nurlanov Adil
 Repository: https://github.com/Alflotta/Library_loans.git
 Branch: main
-Final commit: (write the commit identifier here after the last push)
+Final commit: fb0b3aa831f01ffa50928d02aa28aa1ec3720729
 
 1. PROBLEM, USERS, GOALS
 
@@ -52,15 +52,15 @@ Fine: a late return adds the fine to the member balance. A payment reduces the b
 
 5. THE WORKFLOWS (9, the minimum for four students is 6)
 
-1 Check out a book: validated request, member and book lookup, availability, loan limit, balance block, reservation priority (Zholdas).
-2 Return with fine: late days, fine from the policy, balance update (Zholdas, rule written with Adil).
+1 Check out a book: validated request, member and book lookup, availability, loan limit, balance block, reservation priority (Aliya Zh).
+2 Return with fine: late days, fine from the policy, balance update (Aliya Zh, rule written with Adil).
 3 Renew a loan: not overdue, renewal limit, nobody waiting (Adil).
 4 Reserve a book: only without a free copy, no duplicate, queue position (Adil).
 5 Pay a fine and unblock the member (Adil).
-6 Fines report by loan with a minimum fine filter (Ismagul).
-7 Debt report by member with a configurable score (Ismagul).
-8 Run an operations script lazily, step by step (Abdurakhim).
-9 Save and load the whole state with validation (Abdurakhim).
+6 Fines report by loan with a minimum fine filter (Nuray).
+7 Debt report by member with a configurable score (Nuray).
+8 Run an operations script lazily, step by step (Aliya A).
+9 Save and load the whole state with validation (Aliya A).
 
 6. DEMONSTRATION WITH THE SAMPLE DATA (date 2026-11-14, standard policy)
 
@@ -114,8 +114,7 @@ FinalRulesTests (30, pure and domain): renewal, reservation and queue priority, 
 ScriptStreamTests (15, lazy processing and files): nothing opens before iteration, materialised once, repeated iteration reads twice, disposal after success, early stop, malformed line and consumer exception, open failure, blank lines, missing file, malformed content, file handle released, safe writer.
 MenuWorkflowTests (13, complete workflows and file handling): renew and late return saved and reloaded; the whole script with all rules and the saved state; a blocked member rejected and a consistent saved state; policy difference; reports; scoring switch; export and a failed export; lookups; invalid input; fines from a CSV file; missing state file; malformed JSON and inconsistent state; save and load round trip.
 The requirement of at least 12 tests with 8 pure, 2 workflow and 2 file tests (missing file and malformed content) is met several times over.
-Latest test outcome: (write here the summary line of dotnet test, for example total 128, passed 128, failed 0).
-Defects found by the tests during development are listed in the group report.
+Latest test outcome:  total 135, passed 135, failed 0
 
 10. ERROR HANDLING
 
@@ -132,13 +131,15 @@ Console only. One state file, no user accounts and no concurrent use. Dates for 
 
 13. CONTRIBUTIONS
 
-Zholdas Aliya (IT-2505): Result, AppError, ErrorCode, Map, Bind, Match; LibraryWorkflow (Execute, Apply, Steps, Run, checkout chain); ValidatedCheckout; MenuSession and Program; workflows 1 and 2. Tests: MenuWorkflowTests (complete workflows and failure paths) and the safe sequence tests.
+Zholdas Aliya (IT-2505): Result, AppError, ErrorCode, Map, Bind, Match; LibraryWorkflow (Execute, Apply, Steps, Run, checkout chain); ValidatedCheckout; MenuSession and Program; native C library (native/libraryloans_native.c and .h, build.sh, build.ps1, NativeFineCalculator.cs, the "native" policy in Program.cs, ErrorCode.NativeLibraryUnavailable); workflows 1 and 2. Tests: MenuWorkflowTests (complete workflows and failure paths), the safe sequence tests and NativeIntegrationTests (7).
 Ismagul Nuray (IT-2505): Maybe and lookups; LoanQueryExtensions.WhereOverdue, LoanReports, ReportFormat, Scoring (curried function and two configurations), FineWorkflow.Build; workflows 6 and 7. Tests: ReportsTests and the Build and balance tests.
 Abdurakhim Aliya (IT-2505): FileBoundary, ScriptStream, SafeFileWriter, StateStore, StateSnapshot, LibraryState.ToSnapshot and Restore, OperationParser (RENEW, RESERVE, PAY, ParseLine), data files; workflows 8 and 9. Tests: ScriptStreamTests, snapshot, restore and parser tests, file tests in MenuWorkflowTests.
 Nurlanov Adil (IT-2505): LibraryRules, renewals (RenewChecked), reservations (ReserveChecked and the queue priority in Violations), fine charging and balances (CompleteReturn, PayChecked), blocking; workflows 3, 4 and 5. Tests: renewal, reservation, fine, policy, blocking and payment tests in FinalRulesTests.
 Earlier parts (parser of loan CSV, fine stages, validated checkout, Result model) keep the contributions listed in the earlier README files.
 
 14. NATIVE C LIBRARY (P/INVOKE)
+
+Owner: Zholdas Aliya (C source, header, build scripts, C# binding and adapter, native policy in Program.cs, NativeIntegrationTests).
 
 Source: native/libraryloans_native.c and native/libraryloans_native.h. Exported functions: int ll_abi_version(void) and int ll_fine(int days_late, int per_day, int cap, int grace_days). ll_fine returns min((days_late - grace_days) * per_day, cap), 0 inside the grace period, -1 for a negative argument; the arithmetic uses 64 bits.
 C# binding and adapter: LibraryLoans.Boundary/NativeFineCalculator.cs ([DllImport] class Native, TryCreatePolicy, Policy). It is in the Boundary project because loading a binary is a side effect; the Core only receives a Func of int to int.
