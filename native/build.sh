@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-# Builds the native library for the current platform into runtimes/<rid>/native.
-# Needs gcc (or clang). Run from any folder: bash native/build.sh
+
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 root="$(dirname "$here")"

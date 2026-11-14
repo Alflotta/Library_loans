@@ -1,5 +1,4 @@
-# Builds the native library on Windows (x64) into runtimes\win-x64\native.
-# Option 1: gcc from MinGW-w64 / MSYS2 is on PATH. Option 2: run from "x64 Native Tools Command Prompt" (cl.exe).
+
 $ErrorActionPreference = "Stop"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $root = Split-Path -Parent $here
