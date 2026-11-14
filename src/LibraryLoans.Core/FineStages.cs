@@ -13,10 +13,7 @@ public static class FineStages
     public static ImmutableArray<OverdueLoan> SelectOverdue(IEnumerable<Loan> loans, DateOnly asOf)
     {
         ArgumentNullException.ThrowIfNull(loans);
-        return loans
-            .Select(l => new OverdueLoan(l, DaysLate(l, asOf)))
-            .Where(o => o.DaysLate > 0)
-            .ToImmutableArray();
+        return loans.WhereOverdue(asOf).ToImmutableArray();
     }
 
     public static ImmutableArray<FineLine> ApplyFines(ImmutableArray<OverdueLoan> overdue, Func<int, int> fineForDaysLate)
