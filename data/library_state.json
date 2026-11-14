@@ -1,0 +1,102 @@
+{
+  "Members": [
+    "Aigerim",
+    "Beck",
+    "Dana",
+    "Erlan",
+    "Farida"
+  ],
+  "Books": [
+    {
+      "BookId": "Algorithms",
+      "Copies": 1
+    },
+    {
+      "BookId": "Atlas",
+      "Copies": 1
+    },
+    {
+      "BookId": "Clean Code",
+      "Copies": 1
+    },
+    {
+      "BookId": "Dune",
+      "Copies": 2
+    },
+    {
+      "BookId": "SICP",
+      "Copies": 1
+    }
+  ],
+  "Loans": [
+    {
+      "LoanId": "L001",
+      "MemberId": "Aigerim",
+      "BookId": "Clean Code",
+      "LoanDate": "2026-10-20",
+      "Days": 14,
+      "Renewals": 0,
+      "DueDate": "2026-11-03",
+      "ReturnedOn": null,
+      "Fine": 0
+    },
+    {
+      "LoanId": "L002",
+      "MemberId": "Beck",
+      "BookId": "Dune",
+      "LoanDate": "2026-11-05",
+      "Days": 14,
+      "Renewals": 0,
+      "DueDate": "2026-11-19",
+      "ReturnedOn": null,
+      "Fine": 0
+    },
+    {
+      "LoanId": "L003",
+      "MemberId": "Dana",
+      "BookId": "SICP",
+      "LoanDate": "2026-10-01",
+      "Days": 14,
+      "Renewals": 0,
+      "DueDate": "2026-10-15",
+      "ReturnedOn": "2026-10-20",
+      "Fine": 250
+    },
+    {
+      "LoanId": "L004",
+      "MemberId": "Erlan",
+      "BookId": "Atlas",
+      "LoanDate": "2026-11-10",
+      "Days": 7,
+      "Renewals": 0,
+      "DueDate": "2026-11-17",
+      "ReturnedOn": null,
+      "Fine": 0
+    },
+    {
+      "LoanId": "L005",
+      "MemberId": "Farida",
+      "BookId": "Dune",
+      "LoanDate": "2026-11-01",
+      "Days": 7,
+      "Renewals": 1,
+      "DueDate": "2026-11-15",
+      "ReturnedOn": null,
+      "Fine": 0
+    }
+  ],
+  "Reservations": [
+    {
+      "BookId": "Clean Code",
+      "Members": [
+        "Beck"
+      ]
+    }
+  ],
+  "Balances": [
+    {
+      "MemberId": "Dana",
+      "Amount": 250
+    }
+  ]
+}
