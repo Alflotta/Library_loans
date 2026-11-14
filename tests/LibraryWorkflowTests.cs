@@ -27,6 +27,7 @@ public class LibraryWorkflowTests
         "RETURN,L101,2026-10-21",
         "RETURN,L999,2026-10-20",
         "CHECKOUT,L106,Aigerim,Clean Code,2026-10-20,14",
+        "CHECKOUT,L108,Dana,Atlas,2026-10-05,7",
     };
 
     private static LibraryState Applied(TransitionOutcome outcome) =>
@@ -152,7 +153,7 @@ public class LibraryWorkflowTests
         Assert.True(issued.Succeeded);
         Assert.StartsWith("Loan L1 issued", issued.Message);
         Assert.False(refused.Succeeded);
-        Assert.StartsWith("REJECTED: invalid checkout", refused.Message);
+        Assert.Equal("REJECTED (MemberNotFound): Member 'Nobody' is not registered.", refused.Message);
 
         var active = Assert.IsType<LoanState.Active>(issued.State.Loans["L1"]);
         Assert.Null(active.ToLoan().ReturnDate);
@@ -175,10 +176,10 @@ public class LibraryWorkflowTests
 
         var run = LibraryWorkflow.Run(LibraryState.Empty, parsed.Operations);
 
-        Assert.Equal(18, run.Steps.Length);
+        Assert.Equal(19, run.Steps.Length);
         Assert.Equal(11, run.Steps.Count(s => s.Succeeded));
         Assert.Equal(
-            new[] { 4, 9, 11, 12, 14, 16, 17 },
+            new[] { 4, 9, 11, 12, 14, 16, 17, 19 },
             run.Steps.Select((s, i) => (s, i)).Where(p => !p.s.Succeeded).Select(p => p.i + 1).ToArray());
 
         var loans = run.FinalState.ToLoans();
