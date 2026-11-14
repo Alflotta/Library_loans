@@ -7,6 +7,8 @@ public static class FinePolicies
     public const int StrictPerDay = 100;
     public const int StrictCap = 3000;
 
+    public static int NoFine(int daysLate) => 0;
+
     public static int Standard(int daysLate) => Math.Min(daysLate * StandardPerDay, StandardCap);
 
     public static int Strict(int daysLate) => Math.Min(daysLate * StrictPerDay, StrictCap);
